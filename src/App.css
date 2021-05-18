@@ -1,4 +1,6 @@
 .app_wrapper {
+    margin: 0 auto;
+    width: 1600px;
     display: grid;
 
     grid-template-areas:
@@ -13,9 +15,13 @@
     background-color: darkblue;
 }
 
+.header img {
+    width: 50px;
+}
+
 .nav {
     grid-area: n;
-    background-color: darkgreen;
+    background-color: antiquewhite;
 }
 
 .content {
@@ -23,9 +29,7 @@
     background-color: aqua;
 }
 
-.header img {
-    width: 50px;
-}
+
 
 
 
