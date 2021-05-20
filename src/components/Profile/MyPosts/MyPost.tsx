@@ -8,7 +8,14 @@ export const MyPosts = () => {
             <div>
                 new posts
                 <div>
-                   <Post/>
+                    <Post
+                        message={"Hey, how are you?"}
+                        likes={15}
+                    />
+                    <Post
+                        message={"It's my first post."}
+                        likes={10}
+                    />
                 </div>
             </div>
         </div>
