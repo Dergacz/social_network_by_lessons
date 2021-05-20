@@ -16,7 +16,7 @@ export const Post = (props: PostPropsType) => {
             </div>
 
             <div>
-                <span>{props.likes}</span>
+                <span>like {props.likes}</span>
             </div>
         </div>
     )
