@@ -11,21 +11,22 @@ import {Settings} from "./components/Settings/Settings";
 
 function App() {
     return (
-        <div className={"app_wrapper"}>
-            <Header/>
-            <NavBar/>
-            <div className={"app_wrapper_content"}>
-                <BrowserRouter>
+        <BrowserRouter>
+            <div className={"app_wrapper"}>
+                <Header/>
+                <NavBar/>
+                <div className={"app_wrapper_content"}>
+
                     <Route path={"/profile"} render={() => <Profile/>}/>
                     <Route path={"/dialogs"} render={() => <Dialogs/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/settings"} render={() => <Settings/>}/>
-                </BrowserRouter>
+
+                </div>
 
             </div>
-
-        </div>
+        </BrowserRouter>
     );
 }
 
