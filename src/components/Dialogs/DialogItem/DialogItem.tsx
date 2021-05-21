@@ -3,8 +3,8 @@ import s from "./DialogItem.module.css";
 import React from "react";
 
 export type DialogItemPropsType = {
+    id: number
     name: string
-    id: string
 }
 
 export const DialogItem = (props: DialogItemPropsType) => {

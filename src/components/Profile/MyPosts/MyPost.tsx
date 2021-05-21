@@ -3,6 +3,17 @@ import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
 
 export const MyPosts = () => {
+
+    type MyPostType = {
+        message: string
+        likesCount: number
+    }
+
+    const MyPostData: MyPostType[] = [
+        {message: "Hey, how are you?", likesCount: 15},
+        {message: "It's my first post.", likesCount: 10},
+    ];
+
     return (
         <div className={s.myPosts}>
             My post
@@ -10,12 +21,12 @@ export const MyPosts = () => {
                 new posts
                 <div>
                     <Post
-                        message={"Hey, how are you?"}
-                        likes={15}
+                        message={MyPostData[0].message}
+                        likes={MyPostData[0].likesCount}
                     />
                     <Post
-                        message={"It's my first post."}
-                        likes={10}
+                        message={MyPostData[1].message}
+                        likes={MyPostData[1].likesCount}
                     />
                 </div>
             </div>
