@@ -10,37 +10,34 @@ export const Dialogs = () => {
         name: string
     }
 
-    const DialogData: DialogsDataType[] = [
+    const dialogs: DialogsDataType[] = [
         {id: 1, name: "Vasia"},
         {id: 2, name: "Sania"},
         {id: 3, name: "Kirill"},
         {id: 4, name: "Petia"},
     ];
 
-    type MessageDataType = {
+    type MessagesDataType = {
         id: number
         message: string
     }
 
-    const MessageData: MessageDataType[] = [
+    const messages: MessagesDataType[] = [
         {id: 1, message: "Hi!"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "Kak sam?"},
-    ]
+    ];
 
+    let dialogsElements = dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>);
+    let messagesElements = messages.map(m => <Message key={m.id} message={m.message}/>);
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name={DialogData[0].name} id={DialogData[0].id}/>
-                <DialogItem name={DialogData[1].name} id={DialogData[1].id}/>
-                <DialogItem name={DialogData[2].name} id={DialogData[2].id}/>
-                <DialogItem name={DialogData[3].name} id={DialogData[3].id}/>
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message message={MessageData[0].message}/>
-                <Message message={MessageData[1].message}/>
-                <Message message={MessageData[2].message}/>
+                {messagesElements}
             </div>
             <div className={s.textArea}>
                 <textarea></textarea>
