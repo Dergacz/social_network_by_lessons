@@ -1,9 +1,10 @@
 import React from "react";
 import {Post} from "./Post/Post";
+import s from "./MyPost.module.css"
 
 export const MyPosts = () => {
     return (
-        <div>
+        <div className={s.myPosts}>
             My post
             <div>
                 new posts
@@ -17,6 +18,12 @@ export const MyPosts = () => {
                         likes={10}
                     />
                 </div>
+            </div>
+            <div>
+                <textarea></textarea>
+            </div>
+            <div>
+                <button>add post</button>
             </div>
         </div>
     )
