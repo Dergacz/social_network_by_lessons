@@ -1,12 +1,8 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
+import {MyPostType} from "../../../state/state";
 
-
-export type MyPostType = {
-    message: string
-    likesCount: number
-}
 
 export type MyPostPropsType = {
     myPosts: MyPostType[]

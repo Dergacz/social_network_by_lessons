@@ -3,33 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {MyPostType} from "./components/Profile/MyPosts/MyPost";
-import {DialogsDataType, MessagesDataType} from "./components/Dialogs/Dialogs";
+import {state} from "./state/state";
 
-const myPosts: MyPostType[] = [
-    {message: "Hey, how are you?", likesCount: 15},
-    {message: "It's my first post.", likesCount: 10},
-];
 
-const dialogs: DialogsDataType[] = [
-    {id: 1, name: "Vasia"},
-    {id: 2, name: "Sania"},
-    {id: 3, name: "Kirill"},
-    {id: 4, name: "Petia"},
-];
-
-const messages: MessagesDataType[] = [
-    {id: 1, message: "Hi!"},
-    {id: 2, message: "How are you?"},
-    {id: 3, message: "Kak sam?"},
-];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-        myPosts={myPosts}
-        dialogs={dialogs}
-        messages={messages}
+    <App   dialogsPage={state.dialogsPage}
+           profilePage={state.profilePage}
     />
   </React.StrictMode>,
   document.getElementById('root')

@@ -3,12 +3,12 @@ import "./App.css";
 import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs, DialogsDataType, DialogsPropsType, MessagesDataType} from "./components/Dialogs/Dialogs";
+import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {MyPostType} from "./components/Profile/MyPosts/MyPost";
+import {DialogsDataType, MessagesDataType, MyPostType, RootStateType} from "./state/state";
 
 export type AppPropsType = {
     myPosts: MyPostType[]
@@ -17,7 +17,7 @@ export type AppPropsType = {
 }
 
 
-function App(props: AppPropsType) {
+function App(props: RootStateType) {
 
 
 
@@ -28,14 +28,13 @@ function App(props: AppPropsType) {
                 <NavBar/>
                 <div className={"app_wrapper_content"}>
 
-                    <Route path={"/profile"} render={() => <Profile myPosts={props.myPosts}/>}/>
-                    <Route path={"/dialogs"} render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                    <Route path={"/profile"} render={() => <Profile myPosts={props.profilePage.myPosts}/>}/>
+                    <Route path={"/dialogs"} render={() => <Dialogs dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/settings"} render={() => <Settings/>}/>
 
                 </div>
-
             </div>
         </BrowserRouter>
     );
