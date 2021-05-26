@@ -9,6 +9,11 @@ export type MyPostPropsType = {
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
+    const postMessageRef = React.createRef<HTMLTextAreaElement>();
+
+    const addPost = () => {
+        alert(postMessageRef.current?.value)
+    }
 
     let postsElements = props.myPosts.map(p => <Post key={p.likesCount} message={p.message} likes={p.likesCount}/>);
 
@@ -22,10 +27,10 @@ export const MyPosts = (props: MyPostPropsType) => {
                 </div>
             </div>
             <div>
-                <textarea></textarea>
+                <textarea ref={postMessageRef}></textarea>
             </div>
             <div>
-                <button>add post</button>
+                <button onClick={() => addPost()}>add post</button>
             </div>
         </div>
     )

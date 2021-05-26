@@ -1,4 +1,5 @@
 export type MyPostType = {
+    id: number
     message: string
     likesCount: number
 }
@@ -31,8 +32,8 @@ export type RootStateType = {
 export let state: RootStateType = {
     profilePage: {
         myPosts: [
-            {message: "Hey, how are you?", likesCount: 15},
-            {message: "It's my first post.", likesCount: 10},
+            {id: 1, message: "Hey, how are you?", likesCount: 15},
+            {id: 2, message: "It's my first post.", likesCount: 10},
         ]
     },
     dialogsPage: {
@@ -49,4 +50,12 @@ export let state: RootStateType = {
             {id: 3, message: "Kak sam?"},
         ],
     }
-}
+};
+
+const addPost = (postMessage: string) => {
+    const newPost = {
+        id: 3,
+        message: postMessage,
+        likesCount: 0
+    };
+} 
