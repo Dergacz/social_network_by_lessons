@@ -2,14 +2,24 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsPropsType} from "../../state/state";
+import {DialogsDataType, MessagesDataType} from "../../state/state";
+
+
+type DialogsPropsType = {
+    dialogs: DialogsDataType[]
+    messages: MessagesDataType[]
+    addMessage: (textMessage: string) => void
+}
 
 
 export const Dialogs = (props: DialogsPropsType) => {
     const dialogMessageRef = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = () => {
-        alert(dialogMessageRef.current?.value);
+        if (dialogMessageRef.current) {
+            props.addMessage(dialogMessageRef.current.value);
+            dialogMessageRef.current.value = "";
+        }
     }
 
     let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>);

@@ -1,3 +1,5 @@
+import {renderThree} from "../render";
+
 export type MyPostType = {
     id: number
     message: string
@@ -52,10 +54,21 @@ export let state: RootStateType = {
     }
 };
 
-const addPost = (postMessage: string) => {
-    const newPost = {
-        id: 3,
+export const addPost = (postMessage: string) => {
+    const newPost: MyPostType = {
+        id: new Date().getTime(),
         message: postMessage,
         likesCount: 0
     };
-} 
+    state.profilePage.myPosts.push(newPost);
+    renderThree();
+}
+
+export const addMessage = (textMessage: string) => {
+    const newMessage: MessagesDataType = {
+        id: new Date().getTime(),
+        message: textMessage
+    };
+    state.dialogsPage.messages.push(newMessage);
+    renderThree();
+}
