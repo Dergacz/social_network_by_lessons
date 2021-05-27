@@ -2,9 +2,10 @@ import React from "react";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import {renderThree} from "./render";
+import {state} from "./state/state";
 
 
-renderThree();
+renderThree(state);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -8,10 +8,19 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addMessage, addPost, DialogsDataType, MessagesDataType, MyPostType, RootStateType} from "./state/state";
+import {
+    addMessage,
+    addPost,
+    DialogsDataType,
+    MessagesDataType,
+    MyPostType,
+    RootStateType, updateNewMessageText,
+    updateNewPostText
+} from "./state/state";
 
 export type AppPropsType = {
     myPosts: MyPostType[]
+    newPostText: string
     dialogs: DialogsDataType[]
     messages: MessagesDataType[]
 }
@@ -31,11 +40,15 @@ function App(props: RootStateType) {
                     <Route path={"/profile"} render={() => <Profile
                         myPosts={props.profilePage.myPosts}
                         addPost={addPost}
+                        newPostText={updateNewPostText}
+                        message={props.profilePage.newPostText}
                     />}/>
                     <Route path={"/dialogs"} render={() => <Dialogs
                         dialogs={props.dialogsPage.dialogs}
                         messages={props.dialogsPage.messages}
                         addMessage={addMessage}
+                        newMessageText={updateNewMessageText}
+                        message={props.dialogsPage.newMessageText}
                     />}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
