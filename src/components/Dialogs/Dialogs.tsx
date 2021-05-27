@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -24,6 +24,12 @@ export const Dialogs = (props: DialogsPropsType) => {
         props.newMessageText(e.currentTarget.value)
     }
 
+    const onKeyAddMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.charCode === 13) {
+            props.addMessage();
+        }
+    }
+
     let dialogsElements = props.dialogs.map(d => <DialogItem
         key={d.id}
         id={d.id}
@@ -47,6 +53,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <textarea
                     value={props.message}
                     onChange={onMessageText}
+                    onKeyPress={onKeyAddMessage}
                 />
             </div>
             <div>

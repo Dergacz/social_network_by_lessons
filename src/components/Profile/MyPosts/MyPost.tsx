@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
 import {MyPostType} from "../../../state/state";
@@ -14,11 +14,17 @@ export type MyPostPropsType = {
 export const MyPosts = (props: MyPostPropsType) => {
 
     const addPost = () => {
-            props.addPost();
+        props.addPost();
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.newPostText(e.currentTarget.value);
+        props.newPostText(e.currentTarget.value);
+    }
+
+    const onKeyAddPost = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.charCode === 13) {
+            props.addPost();
+        }
     }
 
     let postsElements = props.myPosts.map(p => <Post
@@ -36,6 +42,7 @@ export const MyPosts = (props: MyPostPropsType) => {
                     <textarea
                         onChange={onPostChange}
                         value={props.message}
+                        onKeyPress={onKeyAddPost}
                     />
                 </div>
                 <div>
