@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, DialogsDataType, MessagesDataType} from "../../state/state";
+import {ActionsType, addMessageAC, DialogsDataType, MessagesDataType, updateNewMessageTextAC} from "../../state/state";
 
 
 type DialogsPropsType = {
@@ -16,16 +16,16 @@ type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
     const addMessage = () => {
-            props.dispatch({type: "ADD_MESSAGE", messageText: props.message});
+            props.dispatch(addMessageAC(props.message));
         }
 
     const onMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE_NEW_MESSAGE_TEXT", updateTextMessage: e.currentTarget.value});
+        props.dispatch(updateNewMessageTextAC(e.currentTarget.value));
     }
 
     const onKeyAddMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.charCode === 13) {
-            props.dispatch({type: "ADD_MESSAGE", messageText: props.message});
+            props.dispatch(addMessageAC(props.message));
         }
     }
 

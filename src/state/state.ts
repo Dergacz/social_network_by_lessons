@@ -61,6 +61,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
+const ADD_POST = "ADD_POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const ADD_MESSAGE = "ADD_MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
+
 
 export let store: StoreType = {
     _state: {
@@ -128,5 +133,34 @@ export let store: StoreType = {
             this._state.dialogsPage.newMessageText = action.updateTextMessage;
             this._callSubscriber();
         }
+    }
+}
+
+
+export const AddPostAC = (postText: string): AddPostActionType => {
+    return {
+        type: ADD_POST,
+        postText
+    }
+}
+
+export const updateNewPostTextAC = (updatePostMessage: string):UpdateNewPostTextActionType => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        updatePostMessage
+    }
+}
+
+export const addMessageAC = (messageText: string): AddMessageActionType => {
+    return {
+        type: ADD_MESSAGE,
+        messageText
+    }
+}
+
+export const updateNewMessageTextAC = (updateTextMessage: string): UpdateNewMessageTextActionType => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        updateTextMessage
     }
 }
