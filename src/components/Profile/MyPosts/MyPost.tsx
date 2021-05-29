@@ -1,29 +1,28 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
-import {MyPostType} from "../../../state/state";
+import {ActionsType, MyPostType} from "../../../state/state";
 
 
 export type MyPostPropsType = {
     myPosts: MyPostType[]
-    addPost: () => void
-    newPostText: (text: string) => void
     message: string
+    dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
 
     const addPost = () => {
-        props.addPost();
+        props.dispatch({type: "ADD_POST", postText: props.message});
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.newPostText(e.currentTarget.value);
+        props.dispatch({type: "UPDATE_NEW_POST_TEXT", updatePostMessage: e.currentTarget.value});
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.charCode === 13) {
-            props.addPost();
+            props.dispatch({type: "ADD_POST", postText: props.message});
         }
     }
 
