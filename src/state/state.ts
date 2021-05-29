@@ -1,6 +1,3 @@
-let renderThree = () => {
-
-}
 
 export type MyPostType = {
     id: number
@@ -34,68 +31,80 @@ export type RootStateType = {
     dialogsPage: DialogsPropsType
 }
 
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    _callSubscriber: () => void
+    addPost: () => void
+    updateNewPostText: (textMessage: string) => void
+    addMessage: () => void
+    updateNewMessageText: (textMessage: string) => void
+    subscribe: (observer: () => void) => void
+}
 
-export let state: RootStateType = {
-    profilePage: {
-        myPosts: [
-            {id: 1, message: "Hey, how are you?", likesCount: 15},
-            {id: 2, message: "It's my first post.", likesCount: 10},
-        ],
-        newPostText: ""
+export let store: StoreType = {
+    _state: {
+        profilePage: {
+            myPosts: [
+                {id: 1, message: "Hey, how are you?", likesCount: 15},
+                {id: 2, message: "It's my first post.", likesCount: 10},
+            ],
+            newPostText: ""
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: "Vasia"},
+                {id: 2, name: "Sania"},
+                {id: 3, name: "Kirill"},
+                {id: 4, name: "Petia"},
+            ],
+
+            messages: [
+                {id: 1, message: "Hi!"},
+                {id: 2, message: "How are you?"},
+                {id: 3, message: "Kak sam?"},
+            ],
+            newMessageText: ""
+        }
     },
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: "Vasia"},
-            {id: 2, name: "Sania"},
-            {id: 3, name: "Kirill"},
-            {id: 4, name: "Petia"},
-        ],
+    getState() {
+        return this._state
+    },
+    _callSubscriber ()  {
+    },
+    addPost () {
+        const newPost: MyPostType = {
+            id: new Date().getTime(),
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        };
+        if (this._state.profilePage.newPostText.trim() !== "") {
+            this._state.profilePage.myPosts.push(newPost);
+        }
+        this._state.profilePage.newPostText = "";
+        this._callSubscriber();
+    },
+    updateNewPostText (textMessage: string) {
+        this._state.profilePage.newPostText = textMessage;
+        this._callSubscriber();
+    },
+    addMessage () {
+        const newMessage: MessagesDataType = {
+            id: new Date().getTime(),
+            message: this._state.dialogsPage.newMessageText
+        };
+        if (this._state.dialogsPage.newMessageText.trim() !== ""){
+            this._state.dialogsPage.messages.push(newMessage);
+        }
+        this._state.dialogsPage.newMessageText = "";
+        this._callSubscriber();
+    },
+    updateNewMessageText (textMessage: string) {
+        this._state.dialogsPage.newMessageText = textMessage;
+        this._callSubscriber();
+    },
+    subscribe (observer) {
+        this._callSubscriber = observer;
+    },
 
-        messages: [
-            {id: 1, message: "Hi!"},
-            {id: 2, message: "How are you?"},
-            {id: 3, message: "Kak sam?"},
-        ],
-        newMessageText: ""
-    }
-};
-
-export const addPost = () => {
-    const newPost: MyPostType = {
-        id: new Date().getTime(),
-        message: state.profilePage.newPostText,
-        likesCount: 0
-    };
-    if (state.profilePage.newPostText.trim() !== "") {
-        state.profilePage.myPosts.push(newPost);
-    }
-    state.profilePage.newPostText = "";
-    renderThree();
-}
-
-export const updateNewPostText = (textMessage: string) => {
-    state.profilePage.newPostText = textMessage;
-    renderThree();
-}
-
-
-export const addMessage = () => {
-    const newMessage: MessagesDataType = {
-        id: new Date().getTime(),
-        message: state.dialogsPage.newMessageText
-    };
-    if (state.dialogsPage.newMessageText.trim() !== ""){
-        state.dialogsPage.messages.push(newMessage);
-    }
-    state.dialogsPage.newMessageText = "";
-    renderThree();
-}
-
-export const updateNewMessageText = (textMessage: string) => {
-    state.dialogsPage.newMessageText = textMessage;
-    renderThree();
-}
-
-export const subscribe = (observer: () => void) => {
-    renderThree = observer;
 }
