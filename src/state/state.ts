@@ -66,7 +66,9 @@ export const addPost = () => {
         message: state.profilePage.newPostText,
         likesCount: 0
     };
-    state.profilePage.myPosts.push(newPost);
+    if (state.profilePage.newPostText.trim() !== "") {
+        state.profilePage.myPosts.push(newPost);
+    }
     state.profilePage.newPostText = "";
     renderThree();
 }
@@ -82,7 +84,9 @@ export const addMessage = () => {
         id: new Date().getTime(),
         message: state.dialogsPage.newMessageText
     };
-    state.dialogsPage.messages.push(newMessage);
+    if (state.dialogsPage.newMessageText.trim() !== ""){
+        state.dialogsPage.messages.push(newMessage);
+    }
     state.dialogsPage.newMessageText = "";
     renderThree();
 }
