@@ -1,4 +1,6 @@
-import {renderThree} from "../render";
+let renderThree = () => {
+
+}
 
 export type MyPostType = {
     id: number
@@ -66,12 +68,12 @@ export const addPost = () => {
     };
     state.profilePage.myPosts.push(newPost);
     state.profilePage.newPostText = "";
-    renderThree(state);
+    renderThree();
 }
 
 export const updateNewPostText = (textMessage: string) => {
     state.profilePage.newPostText = textMessage;
-    renderThree(state);
+    renderThree();
 }
 
 
@@ -82,10 +84,14 @@ export const addMessage = () => {
     };
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = "";
-    renderThree(state);
+    renderThree();
 }
 
 export const updateNewMessageText = (textMessage: string) => {
     state.dialogsPage.newMessageText = textMessage;
-    renderThree(state);
+    renderThree();
+}
+
+export const subscribe = (observer: () => void) => {
+    renderThree = observer;
 }
