@@ -2,7 +2,8 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, addMessageAC, DialogsDataType, MessagesDataType, updateNewMessageTextAC} from "../../state/state";
+import {ActionsType, DialogsDataType, MessagesDataType} from "../../state/state";
+import {addMessageAC, updateNewMessageTextAC} from "../../state/dialogsReducer";
 
 
 type DialogsPropsType = {
@@ -11,7 +12,6 @@ type DialogsPropsType = {
     message: string
     dispatch: (action: ActionsType) => void
 }
-
 
 export const Dialogs = (props: DialogsPropsType) => {
 

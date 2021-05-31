@@ -1,7 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
-import {ActionsType, AddPostAC, MyPostType, updateNewPostTextAC} from "../../../state/state";
+import {ActionsType, MyPostType,} from "../../../state/state";
+import {AddPostAC, updateNewPostTextAC} from "../../../state/profileReducer";
 
 
 export type MyPostPropsType = {
