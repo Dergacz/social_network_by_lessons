@@ -3,7 +3,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom";
 import App from "./App";
-import {store} from "./state/state";
+import {store} from "./state/redux-store";
+
 
 let renderThree = () => {
     ReactDOM.render(
