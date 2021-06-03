@@ -10,22 +10,23 @@ type DialogsPropsType = {
     dialogs: DialogsDataType[]
     messages: MessagesDataType[]
     message: string
-    dispatch: (action: ActionsType) => void
+    addMessageCallBack: () => void
+    updateNewMessageCallBack: (textMessage: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
     const addMessage = () => {
-            props.dispatch(addMessageAC(props.message));
+            props.addMessageCallBack();
         }
 
     const onMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageTextAC(e.currentTarget.value));
+        props.updateNewMessageCallBack(e.currentTarget.value);
     }
 
     const onKeyAddMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.charCode === 13) {
-            props.dispatch(addMessageAC(props.message));
+            props.addMessageCallBack();
         }
     }
 

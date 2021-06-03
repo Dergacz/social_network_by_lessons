@@ -14,7 +14,6 @@ const initialState = {
 export type ProfileInitialStateType = typeof initialState
 
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ActionsType): ProfileInitialStateType => {
-    debugger;
     switch (action.type) {
         case("ADD_POST"): {
             const newPost: MyPostType = {

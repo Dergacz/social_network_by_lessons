@@ -1,33 +1,33 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
-import {ActionsType, MyPostType,} from "../../../state/state";
-import {AddPostAC, updateNewPostTextAC} from "../../../state/profileReducer";
+import {MyPostType} from "../../../state/state";
 
 
 export type MyPostPropsType = {
     myPosts: MyPostType[]
     message: string
-    dispatch: (action: ActionsType) => void
+    addPostCallBack: () => void
+    updateNewPostTextCallBack: (text: string) => void
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
 
     const addPost = () => {
-        props.dispatch(AddPostAC(props.message));
+        props.addPostCallBack();
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value));
+        props.updateNewPostTextCallBack(e.currentTarget.value);
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.charCode === 13) {
-            props.dispatch(AddPostAC(props.message));
+            props.addPostCallBack();
         }
     }
 
-    let postsElements = props.myPosts.map(p => <Post
+    let postsElements = props.myPosts.map((p) => <Post
         key={p.id}
         message={p.message}
         likes={p.likesCount}

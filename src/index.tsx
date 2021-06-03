@@ -11,7 +11,6 @@ let renderThree = () => {
         <React.StrictMode>
             <App
                 store={store}
-
             />
         </React.StrictMode>,
         document.getElementById("root")
