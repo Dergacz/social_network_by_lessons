@@ -9,7 +9,7 @@ let RootReducers = combineReducers({
 
 export const store: Store = createStore(RootReducers);
 
-export type AppStateType =ReturnType<typeof RootReducers>
+export type AppStateType = ReturnType<typeof RootReducers>
 
 
 

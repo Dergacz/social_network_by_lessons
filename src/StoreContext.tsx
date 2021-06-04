@@ -5,10 +5,10 @@ export const StoreContext = React.createContext({} as Store);
 
 type ProviderPropsType = {
     store: Store
-    children?: React.ReactNode
+    children: React.ReactNode
 }
 
-export const Provider = (props: ProviderPropsType) => {
+const Provider = (props: ProviderPropsType) => {
         return (
             <StoreContext.Provider value={props.store}>
                 {props.children}

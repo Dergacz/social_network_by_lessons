@@ -1,13 +1,21 @@
 import {
     ActionsType,
     AddMessageActionType,
-    DialogsDataType,
-    MessagesDataType,
     UpdateNewMessageTextActionType
 } from "./state";
 
 const ADD_MESSAGE = "ADD_MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
+
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+
+export type MessagesDataType = {
+    id: number
+    message: string
+}
 
 const initialState = {
     dialogs: [

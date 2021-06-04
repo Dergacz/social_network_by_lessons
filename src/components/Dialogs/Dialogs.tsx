@@ -2,18 +2,16 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsDataType, MessagesDataType} from "../../state/state";
+import {DialogInitialStateType} from "../../state/dialogsReducer";
 
 
-type DialogsPropsType = {
-    dialogs: DialogsDataType[]
-    messages: MessagesDataType[]
-    message: string
+type DialogPropsType = {
+    dialogsPage: DialogInitialStateType
     addMessageCallBack: () => void
     updateNewMessageCallBack: (textMessage: string) => void
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: DialogPropsType) => {
 
     const addMessage = () => {
             props.addMessageCallBack();
@@ -29,13 +27,13 @@ export const Dialogs = (props: DialogsPropsType) => {
         }
     }
 
-    let dialogsElements = props.dialogs.map(d => <DialogItem
+    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem
         key={d.id}
         id={d.id}
         name={d.name}
     />);
 
-    let messagesElements = props.messages.map(m => <Message
+    let messagesElements = props.dialogsPage.messages.map(m => <Message
         key={m.id}
         message={m.message}
     />);
@@ -50,7 +48,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.textArea}>
                 <textarea
-                    value={props.message}
+                    value={props.dialogsPage.newMessageText}
                     onChange={onMessageText}
                     onKeyPress={onKeyAddMessage}
                 />

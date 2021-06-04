@@ -1,4 +1,4 @@
-import {ActionsType, AddPostActionType, MyPostType, RootStateType, UpdateNewPostTextActionType} from "./state";
+import {ActionsType, AddPostActionType, MyPostType, UpdateNewPostTextActionType} from "./state";
 
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
@@ -46,7 +46,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
 }
 
 
-export const AddPostAC = (postText: string): AddPostActionType => {
+export const addPostAC = (postText: string): AddPostActionType => {
     return {
         type: ADD_POST,
         postText

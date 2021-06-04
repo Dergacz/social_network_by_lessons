@@ -1,12 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from "./MyPost.module.css"
-import {MyPostType} from "../../../state/state";
+import {ProfileInitialStateType} from "../../../state/profileReducer";
 
 
 export type MyPostPropsType = {
-    myPosts: MyPostType[]
-    message: string
+    profilePage: ProfileInitialStateType
     addPostCallBack: () => void
     updateNewPostTextCallBack: (text: string) => void
 }
@@ -27,7 +26,7 @@ export const MyPosts = (props: MyPostPropsType) => {
         }
     }
 
-    let postsElements = props.myPosts.map((p) => <Post
+    let postsElements = props.profilePage.myPosts.map((p) => <Post
         key={p.id}
         message={p.message}
         likes={p.likesCount}
@@ -41,7 +40,7 @@ export const MyPosts = (props: MyPostPropsType) => {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                        value={props.message}
+                        value={props.profilePage.newPostText}
                         onKeyPress={onKeyAddPost}
                     />
                 </div>
