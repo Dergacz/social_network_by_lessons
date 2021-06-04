@@ -2,8 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, DialogsDataType, MessagesDataType} from "../../state/state";
-import {addMessageAC, updateNewMessageTextAC} from "../../state/dialogsReducer";
+import {DialogsDataType, MessagesDataType} from "../../state/state";
 
 
 type DialogsPropsType = {

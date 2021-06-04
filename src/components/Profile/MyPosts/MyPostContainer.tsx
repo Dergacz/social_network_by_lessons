@@ -5,29 +5,33 @@ import {ActionsType, MyPostType,} from "../../../state/state";
 import {AddPostAC, updateNewPostTextAC} from "../../../state/profileReducer";
 import {MyPosts} from "./MyPost";
 import {Store} from "redux";
+import {StoreContext} from "../../../StoreContext";
 
 
-export type MyPostContainerPropsType = {
-    store: Store
-}
-
-export const MyPostsContainer = (props: MyPostContainerPropsType) => {
-    let state = props.store.getState();
-
-    const addPost = () => {
-        props.store.dispatch(AddPostAC(state.profilePage.newPostText))
-    }
-
-    const onPostChange = (text: string) => {
-        props.store.dispatch(updateNewPostTextAC(text))
-    }
+export const MyPostsContainer = () => {
 
     return (
-        <MyPosts
-            addPostCallBack={addPost}
-            updateNewPostTextCallBack={onPostChange}
-            message={state.profilePage.newPostText}
-            myPosts={state.profilePage.myPosts}
-        />
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    let state = store.getState();
+                    const addPost = () => {
+                        store.dispatch(AddPostAC(state.profilePage.newPostText))
+                    }
+
+                    const onPostChange = (text: string) => {
+                        store.dispatch(updateNewPostTextAC(text))
+                    }
+                    return (
+                        <MyPosts
+                            addPostCallBack={addPost}
+                            updateNewPostTextCallBack={onPostChange}
+                            message={state.profilePage.newPostText}
+                            myPosts={state.profilePage.myPosts}
+                        />
+                    )
+                }
+            }
+        </StoreContext.Consumer>
     )
 }
