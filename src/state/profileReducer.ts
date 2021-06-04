@@ -1,7 +1,28 @@
-import {ActionsType, AddPostActionType, MyPostType, UpdateNewPostTextActionType} from "./state";
-
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+
+type AddPostActionType = {
+    type: "ADD_POST"
+    postText: string
+}
+
+type UpdateNewPostTextActionType = {
+    type: "UPDATE_NEW_POST_TEXT"
+    updatePostMessage: string
+}
+
+type ActionsType = AddPostActionType | UpdateNewPostTextActionType;
+
+export type MyPostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type ProfilePagePropsType = {
+    myPosts: MyPostType[]
+    newPostText: string
+}
 
 const initialState = {
     myPosts: [
@@ -44,7 +65,6 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             return state;
     }
 }
-
 
 export const addPostAC = (postText: string): AddPostActionType => {
     return {
