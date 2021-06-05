@@ -6,22 +6,15 @@ import App from "./App";
 import {store} from "./state/redux-store";
 import {Provider} from "react-redux";
 
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
 
-
-let renderThree = () => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store} >
-                <App/>
-            </Provider>
-
-        </React.StrictMode>,
-        document.getElementById("root")
-    );
-}
-
-renderThree();
-store.subscribe(renderThree);
+    </React.StrictMode>,
+    document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
