@@ -36,7 +36,7 @@ export type ProfileInitialStateType = typeof initialState
 
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ActionsType): ProfileInitialStateType => {
     switch (action.type) {
-        case("ADD_POST"): {
+        case(ADD_POST): {
             const newPost: MyPostType = {
                 id: new Date().getTime(),
                 message: state.newPostText,
@@ -54,7 +54,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             // state.newPostText = "";
         }
 
-        case("UPDATE_NEW_POST_TEXT"): {
+        case(UPDATE_NEW_POST_TEXT): {
             const stateCopy = {
                 ...state,
                 newPostText: action.updatePostMessage

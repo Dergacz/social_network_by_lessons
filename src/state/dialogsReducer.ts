@@ -43,7 +43,7 @@ export type DialogInitialStateType = typeof initialState;
 
 export const dialogsReducer = (state: DialogInitialStateType = initialState, action: ActionsType): DialogInitialStateType => {
     switch (action.type) {
-        case("ADD_MESSAGE"): {
+        case(ADD_MESSAGE): {
             const newMessage: MessagesDataType = {
                 id: new Date().getTime(),
                 message: state.newMessageText
@@ -55,7 +55,7 @@ export const dialogsReducer = (state: DialogInitialStateType = initialState, act
             }
             return stateCopy;
         }
-        case ("UPDATE_NEW_MESSAGE_TEXT"): {
+        case (UPDATE_NEW_MESSAGE_TEXT): {
             const stateCopy = {
                 ...state,
                 newMessageText: action.updateTextMessage
