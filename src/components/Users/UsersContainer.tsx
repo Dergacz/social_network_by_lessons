@@ -1,11 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Users} from "./Users";
-import {AppStateType, store} from "../../state/redux-store";
+import {AppStateType} from "../../state/redux-store";
 import {followAC, setUsersAC, unfollowAC, UsersInitialStateType, UsersType} from "../../state/usersReducer";
 import {Dispatch} from "redux";
-
-const state = store.getState();
 
 type MapStateToProps = {
     users: UsersInitialStateType
@@ -36,7 +34,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         setUsers: (users: UsersType[]) => {
             dispatch(setUsersAC(users))
         }
-
     }
 }
 
