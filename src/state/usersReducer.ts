@@ -20,45 +20,24 @@ type SetUsersActionType = {
 type ActionsType = FollowActionType | UnfollowActionType | SetUsersActionType;
 
 export type UsersType = {
+    name: string
     id: number
-    followed: boolean
-    photo: string
-    fullName: string
-    status: string
-    location: {
-        city: string,
-        country: string
+    photos:{
+       small: string
+       large: string
     }
+    status: string
+    followed: boolean
 }
 
 
-const initialState = {
-    users: [
-        {
-            id: 1,
-            followed: true,
-            photo: "https://pyxis.nymag.com/v1/imgs/a33/af5/8a1621c95815265678e04e5cf92505143a-17-south-park-2204.rsocial.w1200.jpg",
-            fullName: "Butters",
-            location: {
-                city: "Colorado",
-                country: "USA"
-            }
-        },
-        {
-            id: 2,
-            followed: false,
-            photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH1HzhTHEF5Ii7SQngUWVqhrm37ptZPlEVbA&usqp=CAU",
-            fullName: "Eric",
-            location: {
-                city: "Colorado",
-                country: "USA"
-            }
-        },
-    ] as UsersType[],
-
+export type UsersInitialStateType = {
+    users: UsersType[]
 }
 
-export type UsersInitialStateType = typeof initialState
+const initialState: UsersInitialStateType = {
+    users: []
+}
 
 export const usersReducer = (state: UsersInitialStateType = initialState, action: ActionsType): UsersInitialStateType => {
     switch (action.type) {
