@@ -6,13 +6,13 @@ import {UsersPropsType} from "./UsersContainer";
 
 export class UsersClass extends React.Component<UsersPropsType, UsersPropsType> {
 
-    constructor(props: UsersPropsType) {
-        super(props);
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
     }
+
     render () {
         return (
             <div>
