@@ -1,16 +1,49 @@
-import React, {MouseEventHandler} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../state/redux-store";
 import {
     followAC,
-    setCurrentPageAC, setTotalUsersCountAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
     setUsersAC,
     unfollowAC,
     UsersInitialStateType,
     UsersType
 } from "../../state/usersReducer";
 import {Dispatch} from "redux";
-import {UsersClass} from "./UsersClass";
+import axios from "axios";
+import {Users} from "./Users";
+
+export class UsersAPIComponent extends React.Component<UsersPropsType, UsersPropsType> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            })
+    }
+
+
+    render() {
+
+        return (
+            <Users
+                users={this.props.users}
+                pageSize={this.props.pageSize}
+                totalUsersCount={this.props.totalUsersCount}
+                currentPage={this.props.currentPage}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+                setUsers={this.props.setUsers}
+                setCurrentPage={this.props.setCurrentPage}
+                setTotalUsersCount={this.props.setTotalUsersCount}
+            />
+        )
+
+
+    }
+}
 
 type MapStateToProps = {
     users: UsersInitialStateType
@@ -24,7 +57,7 @@ type MapDispatchToProps = {
     unfollow: (userId: number) => void
     setUsers: (users: UsersType[]) => void
     setCurrentPage: (currentPage: number) => void
-    serTotalUsersCount: (totalCount: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 export type UsersPropsType = MapStateToProps & MapDispatchToProps;
@@ -52,10 +85,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         setCurrentPage: (currentPage: number) => {
             dispatch(setCurrentPageAC(currentPage))
         },
-        serTotalUsersCount: (totalCount: number) => {
+        setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
         }
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

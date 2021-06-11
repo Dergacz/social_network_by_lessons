@@ -2,36 +2,21 @@ import React from "react";
 import s from "./Users.module.css";
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
-import user from "../../UserImg/user.png";
 
 
-export const Users = (props: UsersPropsType) => {
-
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
-    const onPageChanged = (pageNumber: number) => {
-        props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-            .then(response => {
-                props.setUsers(response.data.items);
-            });
+export const UsersFunc = (props: UsersPropsType) => {
+    const getUsers = () => {
+        if (props.users.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage ===  p ? s.selectedPage : ""}
-                        onClick={() => {onPageChanged(p)}}
-                    >{p}</span>
-                })}
-
-            </div>
+            <button onClick={getUsers}>Get users</button>
             {
                 props.users.users.map(u => <div key={u.id}>
                     <span>
@@ -39,8 +24,8 @@ export const Users = (props: UsersPropsType) => {
                             <img
                                 className = {s.userPhoto}
                                 src={u.photos.small !== null
-                                    ? u.photos.small
-                                    : user}
+                                ? u.photos.small
+                                : "https://lh3.googleusercontent.com/proxy/b-935E3HGIQMqwecA7cZtEnPB2_zDtTScu1fp6ntziPfmaAqf4WHVyrvNyAyo8U4V7RRQwOt_moq19OEVowbKyi47EANYksT9Q7vbcmbbsRMvlEBa7hS"}
                             />
                         </div>
                         <div>
@@ -48,7 +33,7 @@ export const Users = (props: UsersPropsType) => {
                                 u.followed
                                     ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button>
                                     : <button onClick={() => props.follow(u.id)}>Follow</button>
-                            }
+                              }
                         </div>
                     </span>
                     <span>
