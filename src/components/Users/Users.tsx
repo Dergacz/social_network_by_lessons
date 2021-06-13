@@ -15,8 +15,10 @@ export const Users = (props: UsersPropsType) => {
 
     const onPageChanged = (pageNumber: number) => {
         props.setCurrentPage(pageNumber);
+        props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
             .then(response => {
+                props.toggleIsFetching(false);
                 props.setUsers(response.data.items);
             });
     }

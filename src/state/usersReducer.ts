@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 type FollowActionType = {
     type: "FOLLOW"
@@ -29,11 +30,17 @@ type SetTotalUsersCountActionType = {
     totalCount: number
 }
 
+type ToggleIsFetchingActionType = {
+    type: "TOGGLE_IS_FETCHING"
+    isFetching: boolean
+}
+
 type ActionsType = FollowActionType
     | UnfollowActionType
     | SetUsersActionType
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
+    | ToggleIsFetchingActionType
 
 export type UsersType = {
     name: string
@@ -52,13 +59,15 @@ export type UsersInitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const initialState: UsersInitialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 }
 
 export const usersReducer = (state: UsersInitialStateType = initialState, action: ActionsType): UsersInitialStateType => {
@@ -92,7 +101,6 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
             }
         }
         case (SET_CURRENT_PAGE): {
-            debugger
             return {
                 ...state,
                 currentPage: action.currentPage
@@ -102,6 +110,12 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
             return {
                 ...state,
                 totalUsersCount: action.totalCount
+            }
+        }
+        case (TOGGLE_IS_FETCHING): {
+            return {
+                ...state,
+                isFetching: action.isFetching
             }
         }
         default:
@@ -141,6 +155,13 @@ export const setTotalUsersCountAC = (totalCount: number): SetTotalUsersCountActi
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount
+    }
+}
+
+export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
     }
 }
 
