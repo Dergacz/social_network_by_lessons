@@ -20,7 +20,18 @@ export const ProfileInfo = (props: MapStateToPropsType) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile?.photos?.large}/>
-                ava + description
+                <div>Name: {props.profile?.fullName}</div>
+                <div>{props.profile.lookingForAJob}</div>
+                <div>{props.profile.lookingForAJobDescription}</div>
+                <div>My contacts:</div>
+                <div>{props.profile.contacts?.facebook}</div>
+                <div>{props.profile.contacts?.vk}</div>
+                <div>{props.profile.contacts?.github}</div>
+                <div>{props.profile.contacts?.twitter}</div>
+                <div>{props.profile.contacts?.instagram}</div>
+                <div>{props.profile.contacts?.mainLink}</div>
+                <div>{props.profile.contacts?.website}</div>
+                <div>{props.profile.contacts?.youtube}</div>
             </div>
         </div>
 
