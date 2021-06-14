@@ -11,7 +11,6 @@ import {
     UsersInitialStateType,
     UsersType
 } from "../../state/usersReducer";
-import {Dispatch} from "redux";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import axios from "axios";
@@ -50,8 +49,6 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, UsersProp
             </div>
 
         )
-
-
     }
 }
 

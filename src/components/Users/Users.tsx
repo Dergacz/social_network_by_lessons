@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 import user from "../../UserImg/user.png";
+import { NavLink } from "react-router-dom";
 
 
 export const Users = (props: UsersPropsType) => {
@@ -38,12 +39,15 @@ export const Users = (props: UsersPropsType) => {
                 props.users.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img
-                                className = {s.userPhoto}
-                                src={u.photos.small !== null
-                                    ? u.photos.small
-                                    : user}
-                            />
+                            <NavLink to={"/profile/" + u.id}>
+                              <img
+                                  className = {s.userPhoto}
+                                  src={u.photos.small !== null
+                                      ? u.photos.small
+                                      : user}
+                              />
+                            </NavLink>
+
                         </div>
                         <div>
                             {

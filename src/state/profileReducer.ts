@@ -1,5 +1,6 @@
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 type AddPostActionType = {
     type: "ADD_POST"
@@ -11,7 +12,12 @@ type UpdateNewPostTextActionType = {
     updatePostMessage: string
 }
 
-type ActionsType = AddPostActionType | UpdateNewPostTextActionType;
+type SetUserProfileActionType = {
+    type: "SET_USER_PROFILE"
+    profile: ProfileType | null
+}
+
+type ActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileActionType;
 
 export type MyPostType = {
     id: number
@@ -24,12 +30,37 @@ export type ProfilePagePropsType = {
     newPostText: string
 }
 
+export type ProfileType = {
+        userId: number
+        lookingForAJob: boolean
+        lookingForAJobDescription:string
+        fullName: string
+        contacts: {
+            github: string
+            vk: string
+            facebook: string
+            instagram: string
+            twitter: string
+            website: string
+            youtube: string
+            mainLink: string
+        }
+        photos: {
+            small: string
+            large: string
+        }
+
+
+
+}
+
 const initialState = {
     myPosts: [
         {id: 1, message: "Hey, how are you?", likesCount: 15},
         {id: 2, message: "It's my first post.", likesCount: 10},
     ] as MyPostType[],
-    newPostText: ""
+    newPostText: "",
+    profile: null as ProfileType | null
 }
 
 export type ProfileInitialStateType = typeof initialState
@@ -61,6 +92,12 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             }
             return stateCopy;
         }
+        case (SET_USER_PROFILE): {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
     }
@@ -77,5 +114,12 @@ export const updateNewPostTextAC = (updatePostMessage: string): UpdateNewPostTex
     return {
         type: UPDATE_NEW_POST_TEXT,
         updatePostMessage
+    }
+}
+
+export const setUserProfile = (profile: ProfileType | null): SetUserProfileActionType => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
     }
 }
