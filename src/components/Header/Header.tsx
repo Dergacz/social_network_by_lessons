@@ -10,7 +10,7 @@ export const Header = (props: AuthPropsType) => {
             <img src={"https://cdn.logo.com/hotlink-ok/logo-social.png"}/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? props.login
+                    ? <div className={s.name}>Stas Dergach{props.login}</div>
                     : <NavLink to={"/login"}>
                         Login
                     </NavLink>
