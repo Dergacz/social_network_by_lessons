@@ -4,6 +4,7 @@ import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 import user from "../../UserImg/user.png";
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../Api/api";
 
 
 export const Users = (props: UsersPropsType) => {
@@ -17,10 +18,10 @@ export const Users = (props: UsersPropsType) => {
     const onPageChanged = (pageNumber: number) => {
         props.setCurrentPage(pageNumber);
         props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(pageNumber, props.pageSize)
+            .then(data => {
                 props.toggleIsFetching(false);
-                props.setUsers(response.data.items);
+                props.setUsers(data.items);
             });
     }
 
