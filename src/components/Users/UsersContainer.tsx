@@ -6,7 +6,8 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching, toggleIsFollowingProgress,
+    toggleIsFetching,
+    toggleIsFollowingProgress,
     unfollow,
     UsersInitialStateType,
     UsersType
@@ -59,7 +60,7 @@ type MapStateToProps = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followingInProgress: number[]
 }
 
 type MapDispatchToProps = {
@@ -69,7 +70,7 @@ type MapDispatchToProps = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleIsFollowingProgress: (followingInProgress: boolean) => void
+    toggleIsFollowingProgress: (id: number, isFetching: boolean) => void
 }
 
 export type UsersPropsType = MapStateToProps & MapDispatchToProps;

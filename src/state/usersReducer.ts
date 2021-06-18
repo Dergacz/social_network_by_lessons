@@ -38,7 +38,9 @@ type ToggleIsFetchingActionType = {
 
 type ToggleIsFollowingProgressActionType = {
     type: "TOGGLE_IS_FOLLOWING_PROGRESS"
-    followingInProgress: boolean
+    userId: number
+    isFetching: boolean
+
 }
 
 type ActionsType = FollowActionType
@@ -60,14 +62,13 @@ export type UsersType = {
     followed: boolean
 }
 
-
 export type UsersInitialStateType = {
     users: UsersType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followingInProgress: number[]
 }
 
 const initialState: UsersInitialStateType = {
@@ -76,7 +77,7 @@ const initialState: UsersInitialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: false
+    followingInProgress: []
 }
 
 export const usersReducer = (state: UsersInitialStateType = initialState, action: ActionsType): UsersInitialStateType => {
@@ -127,10 +128,12 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
                 isFetching: action.isFetching
             }
         }
-        case (TOGGLE_IS_FOLLOWING_PROGRESS): {
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
             return {
                 ...state,
-                followingInProgress: action.followingInProgress
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:
@@ -180,10 +183,12 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionTyp
     }
 }
 
-export const toggleIsFollowingProgress = (followingInProgress: boolean): ToggleIsFollowingProgressActionType => {
+export const toggleIsFollowingProgress = (userId: number, isFetching: boolean): ToggleIsFollowingProgressActionType => {
     return {
         type: TOGGLE_IS_FOLLOWING_PROGRESS,
-        followingInProgress
+        userId,
+        isFetching,
+
     }
 }
 

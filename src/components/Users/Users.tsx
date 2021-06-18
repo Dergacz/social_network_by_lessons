@@ -1,7 +1,6 @@
 import React from "react";
 import s from "./Users.module.css";
 import {UsersPropsType} from "./UsersContainer";
-import axios from "axios";
 import user from "../../UserImg/user.png";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "../../Api/api";
@@ -39,7 +38,8 @@ export const Users = (props: UsersPropsType) => {
 
             </div>
             {
-                props.users.users.map(u => <div key={u.id}>
+                props.users.users.map(u =>  {
+                    return <div key={u.id}>
                     <span>
                         <div>
                             <NavLink to={"/profile/" + u.id}>
@@ -56,36 +56,46 @@ export const Users = (props: UsersPropsType) => {
                             {
                                 u.followed
 
-                                    ? <button disabled={props.followingInProgress} onClick={() => {
-                                        props.toggleIsFollowingProgress(true);
-                                        usersAPI.unFollow(u.id).then(data => {
+                                    ? <button
+                                        disabled={props.followingInProgress.some(id => {
+                                            debugger
+                                            return id === u.id
+                                        })}
+                                        onClick={() => {
+                                            props.toggleIsFollowingProgress(u.id, true);
+
+                                            usersAPI.unFollow(u.id).then(data => {
+                                                debugger
                                                 if (data.resultCode === 0) {
                                                     props.unfollow(u.id);
                                                 }
-                                                props.toggleIsFollowingProgress(false)
+                                                props.toggleIsFollowingProgress(u.id, false)
                                             })
 
-                                    }}>
+                                        }}>
                                         Unfollow
                                     </button>
 
-                                    : <button disabled={props.followingInProgress} onClick={() => {
-                                        props.toggleIsFollowingProgress(true)
-                                        usersAPI.follow(u.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.follow(u.id);
-                                                }
-                                                props.toggleIsFollowingProgress(false);
-                                            })
+                                    : <button
+                                        disabled={props.followingInProgress.some(id => id === u.id)}
+                                        onClick={() => {
+                                            props.toggleIsFollowingProgress(u.id, true);
 
-                                    }}>
+                                            usersAPI.follow(u.id)
+                                                .then(data => {
+                                                    if (data.resultCode === 0) {
+                                                        props.follow(u.id);
+                                                    }
+                                                    props.toggleIsFollowingProgress(u.id, false);
+                                                })
+
+                                        }}>
                                         Follow
                                     </button>
                             }
                                 </div>
                                 </span>
-                    <span>
+                        <span>
                                 <span>
                                 <div>{u.name}</div>
                                 <div>{u.status}</div>
@@ -95,7 +105,11 @@ export const Users = (props: UsersPropsType) => {
                                     {/*<div>{u.location.city}</div>*/}
                                 </span>
                                 </span>
-                </div>)
+                    </div>
+                    }
+
+
+                )
             }
         </div>
     )
