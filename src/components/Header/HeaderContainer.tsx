@@ -13,7 +13,6 @@ export class HeaderComponent extends React.Component<AuthPropsType>{
             withCredentials: true
         })
             .then(response => {
-                debugger
                 if (response.data.resultCode === 0) {
                     this.props.setAuthUserData(response.data);
                 }
