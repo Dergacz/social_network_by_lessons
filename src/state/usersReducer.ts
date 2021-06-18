@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 type FollowActionType = {
     type: "FOLLOW"
@@ -35,12 +36,18 @@ type ToggleIsFetchingActionType = {
     isFetching: boolean
 }
 
+type ToggleIsFollowingProgressActionType = {
+    type: "TOGGLE_IS_FOLLOWING_PROGRESS"
+    followingInProgress: boolean
+}
+
 type ActionsType = FollowActionType
     | UnfollowActionType
     | SetUsersActionType
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
     | ToggleIsFetchingActionType
+    | ToggleIsFollowingProgressActionType
 
 export type UsersType = {
     name: string
@@ -60,6 +67,7 @@ export type UsersInitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: boolean
 }
 
 const initialState: UsersInitialStateType = {
@@ -67,7 +75,8 @@ const initialState: UsersInitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: false
 }
 
 export const usersReducer = (state: UsersInitialStateType = initialState, action: ActionsType): UsersInitialStateType => {
@@ -118,6 +127,12 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
                 isFetching: action.isFetching
             }
         }
+        case (TOGGLE_IS_FOLLOWING_PROGRESS): {
+            return {
+                ...state,
+                followingInProgress: action.followingInProgress
+            }
+        }
         default:
             return state;
     }
@@ -162,6 +177,13 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionTyp
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching
+    }
+}
+
+export const toggleIsFollowingProgress = (followingInProgress: boolean): ToggleIsFollowingProgressActionType => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        followingInProgress
     }
 }
 
