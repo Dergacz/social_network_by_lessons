@@ -29,3 +29,22 @@ export const usersAPI = {
             });
     }
 }
+
+
+export const headersAPI = {
+    showMe () {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            });
+    }
+}
+
+export const profileAPI = {
+    showProfileUser (userId: string) {
+        return instance.get(`profile/` + userId)
+            .then(response => {
+                return response.data
+            })
+    }
+}
