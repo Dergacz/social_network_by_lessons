@@ -16,12 +16,9 @@ export const Users = (props: UsersPropsType) => {
 
     const onPageChanged = (pageNumber: number) => {
         props.setCurrentPage(pageNumber);
-        props.toggleIsFetching(true);
-        usersAPI.getUsers(pageNumber, props.pageSize)
-            .then(data => {
-                props.toggleIsFetching(false);
-                props.setUsers(data.items);
-            });
+        props.getUsers(pageNumber, props.pageSize)
+
+
     }
 
     return (
