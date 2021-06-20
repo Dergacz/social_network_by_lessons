@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
-import {headersAPI, profileAPI} from "../Api/api";
-import {setAuthUserData} from "./authReducer";
+import {profileAPI} from "../Api/api";
 
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
@@ -131,8 +130,8 @@ export const setUserProfile = (profile: ProfileType | null): SetUserProfileActio
 export const showProfileUserThunk = (userId: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.showProfileUser(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data));
+            .then(data => {
+                dispatch(setUserProfile(data));
             })
     }
 }

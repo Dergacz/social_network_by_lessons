@@ -3,7 +3,7 @@ import {Header} from "./Header";
 import {AuthInitialStateType} from "../../state/authReducer";
 import {AppStateType} from "../../state/redux-store";
 import {connect} from "react-redux";
-import {showMeThunk} from "../../state/headerReducer";
+import {showMeThunk} from "../../state/authReducer";
 
 
 export class HeaderComponent extends React.Component<AuthPropsType> {

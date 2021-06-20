@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {headersAPI} from "../Api/api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 
 type SetUserDataType = {
@@ -56,17 +59,31 @@ export const authReducer = (state: AuthInitialStateType = initialState, action: 
     }
 }
 
-// export const setAuthUserData = (id: number | null, email: string | null, login: string | null): SetUserDataType => {
-export const setAuthUserData = (data: DataType[]): SetUserDataType => {
+export const setAuthUserData = (data: AuthInitialStateType["data"]): SetUserDataType => {
     return {
         type: SET_USER_DATA,
-        data: {
-            id: 0,
-            email: "",
-            login: ""
-        }
+        data
+    }
+}
+// export const setAuthUserData = (data: {
+//                                     id: number | null
+//                                     email: string | null
+//                                     login: string | null
+//                                 }): SetUserDataType => {
+//     return {
+//         type: SET_USER_DATA,
+//         data
+//     }
+// }
 
-
+export const showMeThunk = () => {
+    return (dispatch: Dispatch) => {
+        headersAPI.showMe()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(data));
+                }
+            })
     }
 }
 

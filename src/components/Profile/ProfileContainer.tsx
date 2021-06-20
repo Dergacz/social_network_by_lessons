@@ -48,4 +48,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {showProfileUserThunk})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {
+    showProfileUserThunk,
+})(WithUrlDataContainerComponent);

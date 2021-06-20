@@ -56,7 +56,6 @@ export const Users = (props: UsersPropsType) => {
 
                                     ? <button
                                         disabled={props.followingInProgress.some(id => {
-                                            debugger
                                             return id === u.id
                                         })}
                                         onClick={() => {props.unfollowThunk(u.id)}}>
