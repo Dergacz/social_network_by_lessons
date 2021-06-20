@@ -65,16 +65,6 @@ export const setAuthUserData = (data: AuthInitialStateType["data"]): SetUserData
         data
     }
 }
-// export const setAuthUserData = (data: {
-//                                     id: number | null
-//                                     email: string | null
-//                                     login: string | null
-//                                 }): SetUserDataType => {
-//     return {
-//         type: SET_USER_DATA,
-//         data
-//     }
-// }
 
 export const showMeThunk = () => {
     return (dispatch: Dispatch) => {

@@ -9,6 +9,7 @@ const state = store.getState();
 
 type MapStateToPropsType = {
     dialogsPage: DialogInitialStateType
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -16,9 +17,12 @@ type MapDispatchToPropsType = {
     updateNewMessageCallBack: (textMessage: string) => void
 }
 
+export type DialogPropsType = MapStateToPropsType & MapDispatchToPropsType
+
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

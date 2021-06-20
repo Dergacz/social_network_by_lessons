@@ -7,7 +7,10 @@ import {MapStateToPropsType} from "./ProfileContainer";
 export const Profile = (props: MapStateToPropsType) => {
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo
+                profile={props.profile}
+                isAuth={props.isAuth}
+            />
             <MyPostsContainer />
         </div>
     )

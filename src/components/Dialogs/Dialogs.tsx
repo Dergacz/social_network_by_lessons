@@ -2,14 +2,9 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogInitialStateType} from "../../state/dialogsReducer";
+import {DialogPropsType} from "./DialogsContainer";
+import { Redirect } from "react-router-dom";
 
-
-type DialogPropsType = {
-    dialogsPage: DialogInitialStateType
-    addMessageCallBack: () => void
-    updateNewMessageCallBack: (textMessage: string) => void
-}
 
 export const Dialogs = (props: DialogPropsType) => {
 
@@ -37,6 +32,10 @@ export const Dialogs = (props: DialogPropsType) => {
         key={m.id}
         message={m.message}
     />);
+
+    {if (!props.isAuth) {
+        return <Redirect to={"/login"}/>
+    } }
 
     return (
         <div className={s.dialogs}>
