@@ -14,6 +14,7 @@ import {
 } from "../../state/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
 
 export class UsersAPIComponent extends React.Component<UsersPropsType, UsersPropsType> {
 
@@ -22,6 +23,10 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, UsersProp
     }
 
     render() {
+
+        {if (!this.props.isAuth) {
+            return <Redirect to={"/login"}/>
+        }}
 
         return (
             <div>
@@ -40,6 +45,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, UsersProp
                     getUsers={this.props.getUsers}
                     unfollowThunk={this.props.unfollowThunk}
                     followThunk={this.props.followThunk}
+                    isAuth={this.props.isAuth}
                 />
             </div>
         )
@@ -53,6 +59,7 @@ type MapStateToProps = {
     currentPage: number
     isFetching: boolean
     followingInProgress: number[]
+    isAuth: boolean
 }
 
 type MapDispatchToProps = {
@@ -74,7 +81,8 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 

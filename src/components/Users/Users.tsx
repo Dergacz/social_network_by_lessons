@@ -3,8 +3,6 @@ import s from "./Users.module.css";
 import {UsersPropsType} from "./UsersContainer";
 import user from "../../UserImg/user.png";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../Api/api";
-import {followThunk} from "../../state/usersReducer";
 
 
 export const Users = (props: UsersPropsType) => {
