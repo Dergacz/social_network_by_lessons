@@ -89,6 +89,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
         }
 
         case(UPDATE_NEW_POST_TEXT): {
+            debugger
             const stateCopy = {
                 ...state,
                 newPostText: action.updatePostMessage
