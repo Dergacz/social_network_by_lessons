@@ -13,12 +13,12 @@ type UpdateNewMessageTextActionType = {
 
 type ActionsType = AddMessageActionType | UpdateNewMessageTextActionType
 
-type DialogsDataType = {
+export type DialogsDataType = {
     id: number
     name: string
 }
 
-type MessagesDataType = {
+export type MessagesDataType = {
     id: number
     message: string
 }
