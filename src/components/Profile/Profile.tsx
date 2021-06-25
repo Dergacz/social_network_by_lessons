@@ -9,7 +9,6 @@ export const Profile = (props: MapStateToPropsType) => {
         <div className={s.content}>
             <ProfileInfo
                 profile={props.profile}
-                isAuth={props.isAuth}
             />
             <MyPostsContainer />
         </div>
