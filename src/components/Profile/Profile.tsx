@@ -4,11 +4,14 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostContainer";
 import {MapStateToPropsType} from "./ProfileContainer";
 
-export const Profile = (props: MapStateToPropsType) => {
+
+export const Profile = (props: MapStateToPropsType & {updateStatus: (status: string) => void}) => {
     return (
         <div className={s.content}>
             <ProfileInfo
                 profile={props.profile}
+                status={props.status}
+                updateStatus={props.updateStatus}
             />
             <MyPostsContainer />
         </div>

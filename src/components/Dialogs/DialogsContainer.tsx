@@ -52,5 +52,5 @@ class DialogsContainer extends React.Component<DialogPropsType, DialogPropsType>
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
-    WithAuthRedirect
+    // WithAuthRedirect
 )(DialogsContainer)

@@ -17,7 +17,8 @@ export const MyPosts = (props: MyPostPropsType) => {
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostTextCallBack(e.currentTarget.value);
+            props.updateNewPostTextCallBack(e.currentTarget.value);
+
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLTextAreaElement>) => {

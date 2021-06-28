@@ -4,6 +4,7 @@ import {profileAPI} from "../Api/api";
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 type AddPostActionType = {
     type: "ADD_POST"
@@ -20,7 +21,12 @@ type SetUserProfileActionType = {
     profile: ProfileType | null
 }
 
-type ActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileActionType;
+type SetStatusActionType = {
+    type: "SET_STATUS",
+    status: string
+}
+
+type ActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileActionType | SetStatusActionType;
 
 export type MyPostType = {
     id: number
@@ -34,25 +40,24 @@ export type ProfilePagePropsType = {
 }
 
 export type ProfileType = {
-        userId: number
-        lookingForAJob: boolean
-        lookingForAJobDescription:string
-        fullName: string
-        contacts: {
-            github: string
-            vk: string
-            facebook: string
-            instagram: string
-            twitter: string
-            website: string
-            youtube: string
-            mainLink: string
-        }
-        photos: {
-            small: string
-            large: string
-        }
-
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
 
 
 }
@@ -63,7 +68,8 @@ const initialState = {
         {id: 2, message: "It's my first post.", likesCount: 10},
     ] as MyPostType[],
     newPostText: "",
-    profile: null as ProfileType | null
+    profile: null as ProfileType | null,
+    status: ""
 }
 
 export type ProfileInitialStateType = typeof initialState
@@ -81,11 +87,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
                 newPostText: "",
                 myPosts: [...state.myPosts, newPost]
             }
-                return stateCopy;
-            // if (state.newPostText.trim() !== "") {
-            //     state.myPosts.push(newPost);
-            // }
-            // state.newPostText = "";
+            return stateCopy;
         }
 
         case(UPDATE_NEW_POST_TEXT): {
@@ -99,6 +101,12 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             return {
                 ...state,
                 profile: action.profile
+            }
+        }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
             }
         }
         default:
@@ -127,11 +135,39 @@ export const setUserProfile = (profile: ProfileType | null): SetUserProfileActio
     }
 }
 
+export const setStatus = (status: string): SetStatusActionType => {
+    return {
+        type: SET_STATUS,
+        status
+    }
+}
+
 export const showProfileUserThunk = (userId: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.showProfileUser(userId)
             .then(data => {
                 dispatch(setUserProfile(data));
+            })
+    }
+}
+
+export const getStatusThunk = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data));
+            })
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(data => {
+                if (data.data.resultCode === 0) {
+                    dispatch(setStatus(status));
+                }
+
             })
     }
 }
