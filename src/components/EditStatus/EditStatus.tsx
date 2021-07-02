@@ -22,7 +22,7 @@ export const EditStatus = (props: EditStatusPropsType) => {
             setStatus(e.currentTarget.value)
     }
 
-    useEffect(() => setStatus(props.status), [props.status])
+    useEffect(() => setStatus(props.status), [props.status]);
 
     return (
         <div>
