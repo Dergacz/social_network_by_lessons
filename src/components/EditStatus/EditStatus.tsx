@@ -1,7 +1,8 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
 type EditStatusPropsType = {
-    status: string
+    status: string,
+    disabled?: boolean
     updateStatus: (status: string) => void
 }
 
@@ -14,26 +15,30 @@ export const EditStatus = (props: EditStatusPropsType) => {
     }
     const offEditMode = () => {
         setEditMode(false);
-        props.updateStatus(props.status);
+        props.updateStatus(status);
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-            setStatus(e.target.value)
+            setStatus(e.currentTarget.value)
     }
+
+    useEffect(() => setStatus(props.status), [props.status])
 
     return (
         <div>
             {
                 !editMode &&
                     <div>
-                        <span onDoubleClick={onEditMode}>{props.status === null ? "Change status" : props.status}</span>
+                        <span onDoubleClick={onEditMode}>
+                            {status === null ? "Change status" : status}
+                        </span>
                     </div>
             }
             {
                 editMode &&
                 <div>
                     <input
-                        value={props.status}
+                        value={status}
                         onChange={onStatusChange}
                         onBlur={offEditMode}
                         autoFocus
