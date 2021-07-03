@@ -20,7 +20,7 @@ export const ProfileInfo = (props: MapStateToPropsType & {updateStatus: (status:
                 />
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile?.photos?.large}/>
+                <img src={props.profile?.photos?.large} alt={"Profile photo"}/>
                 <div>Name: {props.profile?.fullName}</div>
                 <div>{props.profile.lookingForAJob}</div>
                 <div>{props.profile.lookingForAJobDescription}</div>
