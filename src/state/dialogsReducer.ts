@@ -1,17 +1,12 @@
 const ADD_MESSAGE = "ADD_MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
 
 type AddMessageActionType = {
     type: "ADD_MESSAGE"
     messageText: string
 }
 
-type UpdateNewMessageTextActionType = {
-    type: "UPDATE_NEW_MESSAGE_TEXT"
-    updateTextMessage: string
-}
 
-type ActionsType = AddMessageActionType | UpdateNewMessageTextActionType
+type ActionsType = AddMessageActionType
 
 export type DialogsDataType = {
     id: number
@@ -35,8 +30,7 @@ const initialState = {
         {id: 1, message: "Hi!"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "Kak sam?"},
-    ] as MessagesDataType[],
-    newMessageText: ""
+    ] as MessagesDataType[]
 }
 
 export type DialogInitialStateType = typeof initialState;
@@ -46,19 +40,11 @@ export const dialogsReducer = (state: DialogInitialStateType = initialState, act
         case(ADD_MESSAGE): {
             const newMessage: MessagesDataType = {
                 id: new Date().getTime(),
-                message: state.newMessageText
+                message: action.messageText
             };
             const stateCopy = {
                 ...state,
-                newMessageText: "",
                 messages: [...state.messages, newMessage]
-            }
-            return stateCopy;
-        }
-        case (UPDATE_NEW_MESSAGE_TEXT): {
-            const stateCopy = {
-                ...state,
-                newMessageText: action.updateTextMessage
             }
             return stateCopy;
         }
@@ -74,9 +60,3 @@ export const addMessageAC = (messageText: string): AddMessageActionType => {
     }
 }
 
-export const updateNewMessageTextAC = (updateTextMessage: string): UpdateNewMessageTextActionType => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        updateTextMessage
-    }
-}

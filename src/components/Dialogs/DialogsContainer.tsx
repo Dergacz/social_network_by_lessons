@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageAC, DialogInitialStateType, updateNewMessageTextAC} from "../../state/dialogsReducer";
+import {addMessageAC, DialogInitialStateType} from "../../state/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -13,8 +13,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    addMessageCallBack: () => void
-    updateNewMessageCallBack: (textMessage: string) => void
+    addMessageCallBack: (newMessageBody: string) => void
 }
 
 export type DialogPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -27,11 +26,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        addMessageCallBack: () => {
-          dispatch(addMessageAC(state.dialogsPage.newMessageText))
-        },
-        updateNewMessageCallBack: (textMessage: string) => {
-            dispatch(updateNewMessageTextAC(textMessage));
+        addMessageCallBack: (newMessageBody: string) => {
+          dispatch(addMessageAC(newMessageBody))
         }
     }
 }
@@ -43,7 +39,6 @@ class DialogsContainer extends React.Component<DialogPropsType, DialogPropsType>
                 <Dialogs
                     dialogsPage={this.props.dialogsPage}
                     addMessageCallBack={this.props.addMessageCallBack}
-                    updateNewMessageCallBack={this.props.updateNewMessageCallBack}
                 />
             </div>
         )
