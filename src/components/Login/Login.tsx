@@ -1,5 +1,7 @@
 import React from "react";
 import {reduxForm, InjectedFormProps, Field} from "redux-form";
+import {Input} from "../common/FormsControl/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/Validators";
 
 export type FormDataType = {
     login: string
@@ -20,22 +22,26 @@ export const Login = () => {
     )
 }
 
+const maxLength20 = maxLengthCreator(20);
+
 export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
                     <Field
-                        component={"input"}
+                        component={Input}
                         name={"login"}
                         placeholder={"Login"}
+                        validate={[required, maxLength20]}
                     />
                 </div>
                 <div>
                     <Field
-                        component={"input"}
+                        component={Input}
                         name={"password"}
                         placeholder={"Password"}
+                        validate={[required]}
                     />
                 </div>
                 <div>

@@ -18,7 +18,7 @@ export const AddMyPostForm = (props: InjectedFormProps<FormAddMyPostType>) => {
                     component={Textarea}
                     name={"newPostBody"}
                     placeholeder={"Enter your post"}
-                        validate={[required, maxLength30]}
+                    validate={[required, maxLength30]}
 
                 />
 
