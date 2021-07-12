@@ -12,7 +12,7 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                 <div>
                     <Field
                         component={Input}
-                        name={"login"}
+                        name={"email"}
                         placeholder={"Login"}
                         validate={[required]}
                     />
