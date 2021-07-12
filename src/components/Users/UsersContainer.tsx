@@ -90,5 +90,5 @@ export default compose<React.ComponentType>(
         toggleIsFetching,
         getUsers,
     }),
-    // WithAuthRedirect
+    WithAuthRedirect
 )(UsersComponent)
