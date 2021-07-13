@@ -2,18 +2,19 @@ import {Dispatch} from "redux";
 import {authAPI} from "../Api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET_USER_DATA";
 
 export type AuthInitialStateType = {
-    userId: number | null
+    userId: string
     email: string | null
     login: string | null
     isAuth: boolean
 }
 
 const initialState: AuthInitialStateType = {
-    userId: null,
+    userId: "",
     email: null,
     login: null,
     isAuth: false
@@ -51,7 +52,7 @@ export const authReducer = (state: AuthInitialStateType = initialState, action: 
     }
 }
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetUserDataType => {
+export const setAuthUserData = (userId: string, email: string | null, login: string | null, isAuth: boolean): SetUserDataType => {
     return {
         type: SET_USER_DATA,
         payload: {
@@ -74,11 +75,15 @@ export const showMeThunk = () => (dispatch: Dispatch) => {
 }
 
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: ThunkDispatch<AppStateType, unknown, ActionsType>) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Function) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(showMeThunk());
+            }
+            else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Common error";
+                dispatch(stopSubmit("login", {_error: message}))
             }
         })
 }
@@ -88,7 +93,7 @@ export const logout = () => (dispatch: ThunkDispatch<AppStateType, unknown, Acti
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false));
+                dispatch(setAuthUserData("", null, null, false));
             }
         })
 }

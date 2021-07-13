@@ -3,6 +3,7 @@ import {Input} from "../common/FormsControl/FormsControls";
 import {required} from "../../utils/validators/Validators";
 import React from "react";
 import {FormDataType} from "./Login";
+import s from "./Login.module.css"
 
 
 export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
@@ -33,6 +34,15 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                         type={"checkbox"}
                     /> remember me
                 </div>
+
+                <div>
+                    {
+                        props.error && <div className={s.formError}>
+                            {props.error}
+                        </div>
+                    }
+                </div>
+
                 <div>
                     <button>
                         Login

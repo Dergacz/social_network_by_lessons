@@ -12,6 +12,8 @@ export const Profile = (props: MapStateToPropsType & {updateStatus: (status: str
                 profile={props.profile}
                 status={props.status}
                 updateStatus={props.updateStatus}
+                isAuth={props.isAuth}
+                authorizedUserId={props.authorizedUserId}
             />
             <MyPostsContainer />
         </div>
