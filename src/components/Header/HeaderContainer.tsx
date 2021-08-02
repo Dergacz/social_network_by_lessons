@@ -7,9 +7,7 @@ import {showMeThunk} from "../../state/authReducer";
 
 
 export class HeaderComponent extends React.Component<AuthPropsType> {
-    componentDidMount() {
-        this.props.showMeThunk()
-    }
+
 
     render() {
         return (
@@ -17,7 +15,6 @@ export class HeaderComponent extends React.Component<AuthPropsType> {
                 login={this.props.login}
                 isAuth={this.props.isAuth}
                 data={this.props.data}
-                showMeThunk={this.props.showMeThunk}
                 logout={this.props.logout}
             />
         )
@@ -32,7 +29,6 @@ type MapStateToPropsType = {
 
 
 type MapDispatchToProps = {
-    showMeThunk: () => void
     logout: () => void
 }
 
@@ -47,6 +43,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export const HeaderContainer = connect<MapStateToPropsType, MapDispatchToProps, {}, AppStateType>(mapStateToProps, {
-    showMeThunk,
     logout
 })(HeaderComponent);

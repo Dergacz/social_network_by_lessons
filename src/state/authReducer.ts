@@ -65,7 +65,7 @@ export const setAuthUserData = (userId: string, email: string | null, login: str
 }
 
 export const showMeThunk = () => (dispatch: Dispatch) => {
-    authAPI.showMe()
+    return authAPI.showMe()
         .then(response => {
             if (response.resultCode === 0) {
                 let {id, login, email} = response.data
@@ -80,8 +80,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(showMeThunk());
-            }
-            else {
+            } else {
                 let message = response.data.messages.length > 0 ? response.data.messages[0] : "Common error";
                 dispatch(stopSubmit("login", {_error: message}))
             }

@@ -14,7 +14,6 @@ import {
 } from "../../state/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 export class UsersComponent extends React.Component<UsersPropsType, UsersPropsType> {
@@ -89,6 +88,5 @@ export default compose<React.ComponentType>(
         setTotalUsersCount,
         toggleIsFetching,
         getUsers,
-    }),
-    WithAuthRedirect
+    })
 )(UsersComponent)
