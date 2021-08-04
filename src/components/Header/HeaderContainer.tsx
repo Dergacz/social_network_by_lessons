@@ -4,6 +4,7 @@ import {AuthInitialStateType, logout} from "../../state/authReducer";
 import {AppStateType} from "../../state/redux-store";
 import {connect} from "react-redux";
 import {showMeThunk} from "../../state/authReducer";
+import {getData, getIsAuth, getLogin} from "../../selectors/header-selectors";
 
 
 export class HeaderComponent extends React.Component<AuthPropsType> {
@@ -36,9 +37,9 @@ export type AuthPropsType = MapStateToPropsType & MapDispatchToProps;
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        data: state.auth,
-        isAuth: state.auth.isAuth,
-        login: state.auth.login,
+        data: getData(state),
+        isAuth: getIsAuth(state),
+        login: getLogin(state),
     }
 }
 

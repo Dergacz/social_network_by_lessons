@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {AppStateType, store} from "../../state/redux-store";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {getDialogsPage} from "../../selectors/dialogs-selectors";
 
 const state = store.getState();
 
@@ -20,7 +21,7 @@ export type DialogPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage,
+        dialogsPage: getDialogsPage(state),
     }
 }
 

@@ -6,6 +6,7 @@ import {getStatusThunk, ProfileType, showProfileUserThunk, updateStatus,} from "
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {getAuthorizedUserId, getIsAuth, getProfile, getStatus} from "../../selectors/profile-selectors";
 
 export type MapStateToPropsType = {
     profile: ProfileType | null
@@ -59,11 +60,10 @@ class ProfileContainer extends React.Component<PropsType, PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.userId,
-        isAuth: state.auth.isAuth
-
+        profile: getProfile(state),
+        status: getStatus(state),
+        authorizedUserId: getAuthorizedUserId(state),
+        isAuth: getIsAuth(state)
     }
 }
 
