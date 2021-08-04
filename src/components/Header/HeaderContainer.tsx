@@ -3,7 +3,6 @@ import {Header} from "./Header";
 import {AuthInitialStateType, logout} from "../../state/authReducer";
 import {AppStateType} from "../../state/redux-store";
 import {connect} from "react-redux";
-import {showMeThunk} from "../../state/authReducer";
 import {getData, getIsAuth, getLogin} from "../../selectors/header-selectors";
 
 
