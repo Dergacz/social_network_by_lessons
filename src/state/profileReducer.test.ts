@@ -1,14 +1,15 @@
-import {addPostAC, MyPostType, profileReducer, ProfileType, updateNewPostTextAC} from "./profileReducer";
+import {addPostAC, MyPostType, profileReducer, ProfileType, setStatus} from "./profileReducer";
 
 
-test("add post", () => {
+test("Add post", () => {
     const startState = {
         myPosts: [
             {id: 1, message: "Hey, how are you?", likesCount: 15},
             {id: 2, message: "It's my first post.", likesCount: 10},
         ] as MyPostType[],
         newPostText: "",
-        profile: null as ProfileType | null
+        profile: null as ProfileType | null,
+        status: ""
     }
 
     const action = addPostAC("New post");
@@ -19,21 +20,23 @@ test("add post", () => {
     expect(endState["myPosts"][2].likesCount).toBe(0);
 })
 
-test("Update new post text", () => {
+test("Set status", () => {
     const startState = {
         myPosts: [
             {id: 1, message: "Hey, how are you?", likesCount: 15},
             {id: 2, message: "It's my first post.", likesCount: 10},
         ] as MyPostType[],
         newPostText: "",
-        profile: null as ProfileType | null
+        profile: null as ProfileType | null,
+        status: ""
     }
 
-    const action = updateNewPostTextAC("New post text");
+    const action = setStatus("New status");
 
     const endState = profileReducer(startState, action);
 
-    expect(endState.myPosts.length).toBe(2);
-    expect(endState.newPostText).toBe("New post text");
-});
+    expect(endState.status.length).toBe(10);
+    expect(endState.status).toBe("New status");
+})
+
 
