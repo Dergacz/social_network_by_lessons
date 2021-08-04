@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import {NavBar} from "./components/NavBar/NavBar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -23,13 +23,11 @@ class App extends React.Component<AppPropsType, AppPropsType> {
     }
 
     render() {
-
         if (!this.props.initialized) {
             return <Preloader/>
         }
 
         return (
-            <BrowserRouter>
                 <div className={"app_wrapper"}>
                     <HeaderContainer/>
                     <NavBar/>
@@ -64,7 +62,6 @@ class App extends React.Component<AppPropsType, AppPropsType> {
                         />
                     </div>
                 </div>
-            </BrowserRouter>
         );
     }
 }
@@ -84,5 +81,5 @@ export const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 });
 
 export default compose<React.ComponentType>(
-   // withRouter,
+   withRouter,
 connect(mapStateToProps, {initializeApp}))(App)
