@@ -55,7 +55,7 @@ export class UsersComponent extends React.Component<UsersPropsType, UsersPropsTy
 }
 
 type MapStateToProps = {
-    users: UsersInitialStateType
+    users: UsersType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
