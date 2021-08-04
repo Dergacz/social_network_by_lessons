@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../state/redux-store";
 import {
     followThunk,
-    getUsers,
+    requestUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
@@ -15,6 +15,13 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../selectors/users-selectors";
 
 export class UsersComponent extends React.Component<UsersPropsType, UsersPropsType> {
 
@@ -70,12 +77,12 @@ export type UsersPropsType = MapStateToProps & MapDispatchToProps;
 
 const mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
-        users: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -87,6 +94,6 @@ export default compose<React.ComponentType>(
         setCurrentPage,
         setTotalUsersCount,
         toggleIsFetching,
-        getUsers,
+        getUsers: requestUsers,
     })
 )(UsersComponent)
